@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+converterGson = "2.9.0"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -10,8 +11,24 @@ material = "1.12.0"
 activity = "1.9.1"
 constraintlayout = "2.1.4"
 
+# Hilt
+hilt = "2.48.1"
+hiltExt = "1.1.0"
+
+#Navigation
+nav_version = "2.7.5"
+
+#ViewModel Scope
+vmscope = "2.4.0"
+
+#LifecycleScope
+lfscope = "2.4.0"
+
+ksp = "1.9.20-1.0.13"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -20,7 +37,36 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
+hilt-android-core = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExt" }
+hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExt" }
+
+navigationfragmentktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "nav_version" }
+navigationuiktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "nav_version" }
+navigationdynamicfeaturesfragment = { group = "androidx.navigation", name = "navigation-dynamic-features-fragment", version.ref = "nav_version" }
+navigationtesting = { group = "androidx.navigation", name = "navigation-testing", version.ref = "nav_version" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
+viewbinding = { group = "androidx.databinding", name = "viewbinding", version = "8.1.4" }
+
+viewmodelscope = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "vmscope" }
+lifecyclescope = {group = "androidx.lifecycle", name = "lifecycle-runtime-ktx",version.ref = "lfscope" }
+
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+android-library = { id = "com.android.library", version.ref = "agp" }
+android-test = { id = "com.android.test", version.ref = "agp" }
+
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

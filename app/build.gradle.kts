@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -50,4 +53,25 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Hilt
+    implementation(libs.hilt.android.core)
+    kapt(libs.hilt.compiler)
+
+    // Navigation
+    implementation(libs.navigationfragmentktx)
+    implementation(libs.navigationuiktx)
+    implementation(libs.navigationdynamicfeaturesfragment)
+    androidTestImplementation(libs.navigationtesting)
+
+    // Coroutines scope
+    implementation (libs.lifecyclescope)
+    implementation (libs.viewmodelscope)
+
+    // ViewBinding
+    implementation(libs.viewbinding)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation (libs.converter.gson)
 }
