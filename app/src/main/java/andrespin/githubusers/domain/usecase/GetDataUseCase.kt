@@ -22,6 +22,6 @@ class GetDataUseCase(
 //            is Result.Success -> Log.d("GetDataUseCase", response.data.toString())
 //            is Result.Error -> Log.d("GetDataUseCase", response.exception.message.toString())
 //        }
-        
+
     }
 }
