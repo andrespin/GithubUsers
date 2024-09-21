@@ -21,7 +21,7 @@ class NetworkModule {
         .create()
 
     @Provides
-    fun getUsersApi(gson: Gson) : DataApiService = Retrofit.Builder()
+    fun getApi(gson: Gson) : DataApiService = Retrofit.Builder()
         .baseUrl("https://api.github.com")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build().create(DataApiService::class.java)

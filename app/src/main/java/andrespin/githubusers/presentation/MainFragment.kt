@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import andrespin.githubusers.R
 import andrespin.githubusers.base.BaseFragment
 import andrespin.githubusers.databinding.FragmentMainBinding
+import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
@@ -29,7 +30,11 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override fun initClickListeners() {
 
-        lifecycleScope.launch { model.intent.emit(MainIntent.GetData) }
+
+        binding.layoutSearchView.imgSearch.setOnClickListener {
+            Log.d(frTag, "Start")
+            lifecycleScope.launch { model.intent.emit(MainIntent.GetData) }
+        }
 
     }
 

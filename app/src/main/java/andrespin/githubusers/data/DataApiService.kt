@@ -1,5 +1,6 @@
 package andrespin.githubusers.data
 
+import andrespin.githubusers.domain.ReposData
 import andrespin.githubusers.domain.UsersData
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,5 +17,10 @@ interface DataApiService {
     suspend fun getUsers(
         @Query("q") action: String
     ): Response<UsersData>
+
+    @GET("/search/repositories?")
+    suspend fun getRepos(
+        @Query("q") action: String
+    ): Response<ReposData>
 
 }
