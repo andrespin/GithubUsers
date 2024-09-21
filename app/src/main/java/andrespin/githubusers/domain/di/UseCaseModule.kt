@@ -1,5 +1,6 @@
 package andrespin.githubusers.domain.di
 
+import andrespin.githubusers.domain.ReposRepository
 import andrespin.githubusers.domain.UsersRepository
 import andrespin.githubusers.domain.usecase.GetDataUseCase
 import dagger.Module
@@ -13,7 +14,8 @@ class UseCaseModule {
 
     @Provides
     fun providesGetDataUseCase(
-        usersRepository: UsersRepository
-    ) = GetDataUseCase(usersRepository)
+        usersRepository: UsersRepository,
+        reposRepository: ReposRepository
+    ) = GetDataUseCase(usersRepository, reposRepository)
 
 }
