@@ -1,7 +1,7 @@
 package andrespin.githubusers.data
 
-import andrespin.githubusers.domain.ReposData
-import andrespin.githubusers.domain.UsersData
+import andrespin.githubusers.domain.entity.ReposData
+import andrespin.githubusers.domain.entity.UsersData
 import javax.inject.Inject
 import retrofit2.Response
 import andrespin.githubusers.domain.entity.Result

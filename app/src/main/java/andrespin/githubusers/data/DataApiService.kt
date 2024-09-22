@@ -1,7 +1,7 @@
 package andrespin.githubusers.data
 
-import andrespin.githubusers.domain.ReposData
-import andrespin.githubusers.domain.UsersData
+import andrespin.githubusers.domain.entity.ReposData
+import andrespin.githubusers.domain.entity.UsersData
 import retrofit2.http.GET
 import retrofit2.http.Query
 import retrofit2.Response

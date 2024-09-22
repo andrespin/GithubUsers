@@ -1,7 +1,7 @@
 package andrespin.githubusers.domain.di
 
-import andrespin.githubusers.domain.ReposRepository
-import andrespin.githubusers.domain.UsersRepository
+import andrespin.githubusers.domain.repo.ReposRepository
+import andrespin.githubusers.domain.repo.UsersRepository
 import andrespin.githubusers.domain.usecase.GetDataUseCase
 import dagger.Module
 import dagger.Provides

@@ -1,5 +1,6 @@
-package andrespin.githubusers.domain
+package andrespin.githubusers.domain.repo
 
+import andrespin.githubusers.domain.entity.ReposData
 import andrespin.githubusers.domain.entity.Result
 
 interface ReposRepository {

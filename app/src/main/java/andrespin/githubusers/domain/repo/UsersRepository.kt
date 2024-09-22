@@ -1,6 +1,7 @@
-package andrespin.githubusers.domain
+package andrespin.githubusers.domain.repo
 
 import andrespin.githubusers.domain.entity.Result
+import andrespin.githubusers.domain.entity.UsersData
 
 interface UsersRepository {
 

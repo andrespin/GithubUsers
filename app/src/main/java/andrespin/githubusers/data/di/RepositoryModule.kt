@@ -3,8 +3,8 @@ package andrespin.githubusers.data.di
 import andrespin.githubusers.data.RemoteDataSourceImpl
 import andrespin.githubusers.data.repo.ReposRepositoryImpl
 import andrespin.githubusers.data.repo.UsersRepositoryImpl
-import andrespin.githubusers.domain.ReposRepository
-import andrespin.githubusers.domain.UsersRepository
+import andrespin.githubusers.domain.repo.ReposRepository
+import andrespin.githubusers.domain.repo.UsersRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
