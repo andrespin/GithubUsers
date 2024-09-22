@@ -8,4 +8,5 @@ interface Data{
     val name_repos: String?
     val forks_count_repos: Int?
     val description_repos: String?
+    val html_url_user: String?
 }

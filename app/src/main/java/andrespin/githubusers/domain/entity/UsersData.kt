@@ -40,6 +40,8 @@ data class UsersData(
             get() = null
         override val description_repos: String?
             get() = null
+        override val html_url_user: String?
+            get() = html_url
     }
 }
 

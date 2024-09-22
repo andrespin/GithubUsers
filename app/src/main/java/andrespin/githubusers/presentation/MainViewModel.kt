@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,7 +36,8 @@ class MainViewModel
     private fun getData() {
         Log.d(vmTag, "getData()")
         viewModelScope.launch {
-            getDataUseCase.invoke("andrespin")
+            val d = getDataUseCase.invoke("andrespin")
+            emitState.emit(MainState.ShowData(d))
         }
     }
 

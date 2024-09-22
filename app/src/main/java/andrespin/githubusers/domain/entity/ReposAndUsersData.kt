@@ -7,14 +7,6 @@ data class ReposAndUsersData(
     val login: String?= null,
     val name: String?= null,
     val forks_count: Int? = null,
-    val description: String? = null
+    val description: String? = null,
+    val html_url_user: String? = null
 )
-
-
-//data.avatar_url
-//data.score
-//data.login
-
-//data.name
-//data.forks_count
-//data.description

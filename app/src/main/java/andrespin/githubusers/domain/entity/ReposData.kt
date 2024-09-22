@@ -101,6 +101,8 @@ data class ReposData(
             get() = this.forks_count
         override val description_repos: String?
             get() = this.description
+        override val html_url_user: String?
+            get() = null
     }
 
     data class Owner(
