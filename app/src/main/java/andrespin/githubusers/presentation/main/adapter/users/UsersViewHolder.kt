@@ -1,4 +1,4 @@
-package andrespin.githubusers.presentation.adapter.users
+package andrespin.githubusers.presentation.main.adapter.users
 
 import andrespin.githubusers.databinding.ItemUserBinding
 import andrespin.githubusers.domain.entity.UsersData

@@ -1,4 +1,4 @@
-package andrespin.githubusers.presentation.adapter.repos
+package andrespin.githubusers.presentation.main.adapter.repos
 
 import andrespin.githubusers.databinding.ItemRepoBinding
 import andrespin.githubusers.databinding.ItemUserBinding

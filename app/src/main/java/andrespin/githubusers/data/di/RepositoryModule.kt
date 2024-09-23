@@ -1,8 +1,10 @@
 package andrespin.githubusers.data.di
 
 import andrespin.githubusers.data.RemoteDataSourceImpl
+import andrespin.githubusers.data.repo.ContentRepositoryImpl
 import andrespin.githubusers.data.repo.ReposRepositoryImpl
 import andrespin.githubusers.data.repo.UsersRepositoryImpl
+import andrespin.githubusers.domain.repo.ContentRepository
 import andrespin.githubusers.domain.repo.ReposRepository
 import andrespin.githubusers.domain.repo.UsersRepository
 import dagger.Module
@@ -23,5 +25,10 @@ class RepositoryModule {
     fun getReposRepository(
         remoteDataSourceImpl: RemoteDataSourceImpl
     ) : ReposRepository = ReposRepositoryImpl(remoteDataSourceImpl)
+
+    @Provides
+    fun getRepoContentRepository(
+        remoteDataSourceImpl: RemoteDataSourceImpl
+    ) : ContentRepository = ContentRepositoryImpl(remoteDataSourceImpl)
 
 }

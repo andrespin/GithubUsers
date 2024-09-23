@@ -50,7 +50,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initClickListeners()
+        init()
         observeViewModel()
         process()
         Log.d("$frTag lifecycle", "onViewCreated")
@@ -99,7 +99,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
         Log.d("$frTag lifecycle", "onDetach")
     }
 
-    abstract fun initClickListeners()
+    abstract fun init()
 
     open fun pause() {
 

@@ -4,32 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_back"
-    tools:context=".presentation.main.MainFragment">
+    tools:context=".presentation.repo.RepoFragment">
 
-    <include
-        android:id="@+id/layout_search_view"
-        layout="@layout/layout_search_field"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp">
-    </include>
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Назад"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_data"
-        android:layout_marginTop="90dp"
+        android:id="@+id/rv_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="horizontal"
+        android:layout_marginTop="70dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/btnBack" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

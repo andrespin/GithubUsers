@@ -7,16 +7,20 @@
     <include
         android:id="@+id/item_repo_data"
         layout="@layout/item_repo"
+        android:elevation="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:visibility="gone"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content">
     </include>
 
     <include
         android:id="@+id/item_user_data"
         layout="@layout/item_user"
-        android:visibility="visible"
+        android:visibility="gone"
         android:elevation="100dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"

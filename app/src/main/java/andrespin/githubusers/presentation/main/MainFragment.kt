@@ -1,13 +1,11 @@
-package andrespin.githubusers.presentation
+package andrespin.githubusers.presentation.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import andrespin.githubusers.base.BaseFragment
 import andrespin.githubusers.databinding.FragmentMainBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
-import andrespin.githubusers.presentation.adapter.repos_and_users.DataAdapter
-import android.content.Intent
-import android.net.Uri
+import andrespin.githubusers.presentation.main.adapter.repos_and_users.DataAdapter
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,7 +27,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     override val frTag: String
         get() = "MainFragment"
 
-    override fun initClickListeners() {
+    override fun init() {
         initAdapter()
         binding.layoutSearchView.imgSearch.setOnClickListener {
             Log.d(frTag, "Start")

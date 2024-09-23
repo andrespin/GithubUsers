@@ -1,5 +1,6 @@
 package andrespin.githubusers.data
 
+import andrespin.githubusers.domain.entity.Content
 import andrespin.githubusers.domain.entity.ReposData
 import andrespin.githubusers.domain.entity.UsersData
 import javax.inject.Inject
@@ -14,6 +15,16 @@ class RemoteDataSourceImpl
 
     suspend fun getReposData(name: String): Result<ReposData> =
         getReposResult(dataApiService.getRepos(name))
+
+    suspend fun getRepoContent(userName: String, repoName: String) = getRepoContentResult(
+        dataApiService.getRepoContent("/repos/$userName/$repoName/contents")
+    )
+
+    private fun getRepoContentResult(apiResult: Response<Content?>?) = if (apiResult!!.isSuccessful) {
+        Result.Success(apiResult.body()!!)
+    } else {
+        Result.Error(Exception(apiResult.errorBody().toString()))
+    }
 
     private fun getUsersResult(apiResult: Response<UsersData>) = if (apiResult.isSuccessful) {
         Result.Success(apiResult.body()!!)

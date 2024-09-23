@@ -1,4 +1,4 @@
-package andrespin.githubusers.presentation
+package andrespin.githubusers.presentation.main
 
 import andrespin.githubusers.base.Intent
 import andrespin.githubusers.base.State

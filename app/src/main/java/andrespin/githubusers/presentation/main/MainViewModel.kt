@@ -1,14 +1,11 @@
-package andrespin.githubusers.presentation
+package andrespin.githubusers.presentation.main
 
 import andrespin.githubusers.base.AppViewModel
-import andrespin.githubusers.base.BaseViewModel
 import andrespin.githubusers.domain.usecase.GetDataUseCase
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

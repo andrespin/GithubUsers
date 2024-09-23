@@ -1,9 +1,11 @@
 package andrespin.githubusers.domain.di
 
+import andrespin.githubusers.domain.repo.ContentRepository
 import andrespin.githubusers.domain.repo.ReposRepository
 import andrespin.githubusers.domain.repo.UsersRepository
 import andrespin.githubusers.domain.usecase.ConvertToReposAndUsersDataUseCase
 import andrespin.githubusers.domain.usecase.GetDataUseCase
+import andrespin.githubusers.domain.usecase.GetContentUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +25,9 @@ class UseCaseModule {
         usersRepository: UsersRepository,
         reposRepository: ReposRepository
     ) = GetDataUseCase(convertToReposAndUsersDataUseCase, usersRepository, reposRepository)
+
+    @Provides
+    fun providesGetContentUseCase(contentRepository: ContentRepository)
+    : GetContentUseCase = GetContentUseCase(contentRepository)
 
 }
