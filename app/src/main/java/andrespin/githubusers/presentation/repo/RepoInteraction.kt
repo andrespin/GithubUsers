@@ -15,6 +15,8 @@ sealed class RepoState : State {
 
 sealed class RepoIntent : Intent {
 
-    data object GetData : RepoIntent()
+    data class GetData(val full_name_repo: String) : RepoIntent()
+
+    data class OpenDir(val dir: String) : RepoIntent()
 
 }

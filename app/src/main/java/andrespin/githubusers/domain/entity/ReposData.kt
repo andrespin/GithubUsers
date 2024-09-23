@@ -103,6 +103,8 @@ data class ReposData(
             get() = this.description
         override val html_url_user: String?
             get() = null
+        override val full_name_repo: String?
+            get() = this.full_name
     }
 
     data class Owner(

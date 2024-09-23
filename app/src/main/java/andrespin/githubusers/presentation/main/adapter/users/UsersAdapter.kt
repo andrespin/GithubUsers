@@ -24,7 +24,7 @@ class UsersAdapter : RecyclerView.Adapter<UsersViewHolder>(){
             )
         ).apply {
             itemView.setOnClickListener {
-                
+                // navController.navigate(R.id.action_fragmentA_to_fragmentB)
             }
         }
 

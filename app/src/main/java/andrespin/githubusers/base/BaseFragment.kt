@@ -16,7 +16,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     private lateinit var _viewBinding: VB
 
-    protected lateinit var model: VM
+    lateinit var model: VM
 
     abstract val viewModelClass: Class<VM>
 

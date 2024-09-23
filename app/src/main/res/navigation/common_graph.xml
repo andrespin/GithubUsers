@@ -3,12 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/common_graph"
-    app:startDestination="@id/repo">
+    app:startDestination="@id/main">
 
     <fragment
         android:id="@+id/main"
         android:name="andrespin.githubusers.presentation.main.MainFragment"
         tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_main_to_repo"
+            app:destination="@id/repo" />
     </fragment>
 
     <fragment

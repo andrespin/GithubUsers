@@ -1,7 +1,6 @@
 package andrespin.githubusers.presentation.main.adapter.repos_and_users
 
 import andrespin.githubusers.databinding.ItemDataBinding
-import andrespin.githubusers.domain.entity.Data
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -11,11 +10,11 @@ class DataViewHolder(private val vb: ItemDataBinding) : RecyclerView.ViewHolder(
     fun bind(data: ReposAndUsersData) =
         if (data.areUsers) {
             showUserItem()
-            setDataToUserItem(data.login, data.score.toString())
+            setDataToUserItem(data.login_user, data.score_user.toString())
 
         } else {
             showRepoItem()
-            setDataToRepoItem(data.name, data.forks_count.toString(), data.description)
+            setDataToRepoItem(data.name_repo, data.forks_count_repo.toString(), data.description_repo)
         }
 
     private fun showUserItem() {

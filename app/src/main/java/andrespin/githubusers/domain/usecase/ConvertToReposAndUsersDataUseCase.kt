@@ -20,7 +20,8 @@ class ConvertToReposAndUsersDataUseCase {
                     data[i].name_repos,
                     data[i].forks_count_repos,
                     data[i].description_repos,
-                    data[i].html_url_user
+                    data[i].html_url_user,
+                    data[i].full_name_repo
                 )
             )
         }

@@ -7,6 +7,7 @@ import andrespin.githubusers.presentation.repo.adapter.ContentAdapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -27,8 +28,16 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
         get() = "RepoFragment"
 
     override fun init() {
-        lifecycleScope.launch { model.intent.emit(RepoIntent.GetData) }
         initAdapter()
+        initBackBtnClickListener()
+        val res = arguments?.getString("full_name_repo")
+        lifecycleScope.launch { model.intent.emit(RepoIntent.GetData(res.toString())) }
+    }
+
+    private fun initBackBtnClickListener() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
     }
 
     override fun observeViewModel() =  lifecycleScope.launch {
@@ -46,7 +55,9 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
     }
 
     private fun initAdapter() {
-        adapter = ContentAdapter()
+        adapter = ContentAdapter(this,
+            model,
+            binding.web, binding.rvContent)
         binding.rvContent.layoutManager = LinearLayoutManager(requireContext())
         binding.rvContent.adapter = adapter
     }
