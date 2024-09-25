@@ -15,9 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
-
-    lateinit var adapter: DataAdapter
+class MainFragment : MainFragmentAbstract<FragmentMainBinding, MainViewModel>() {
 
     override val viewModelClass: Class<MainViewModel>
         get() = MainViewModel::class.java
@@ -29,42 +27,12 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         get() = "MainFragment"
 
     override fun init() {
-        initAdapter()
-        initTryAgainClickListener()
-        initSearchClickListener()
+        initAll(this)
+    }
+
+    override fun onResumeFragment() {
         downloadEditTextRequest()
-        setFocusableOn()
     }
-
-    override fun onResumeFragment() = downloadEditTextRequest()
-
-    private fun downloadEditTextRequest() {
-        val search = binding.layoutSearchView.editUser.text.toString()
-        lifecycleScope.launch { model.intent.emit(MainIntent.GetData(search)) }
-        Log.d(frTag, "downloadEditTextRequest() $search")
-    }
-
-    private fun setFocusableOn() {
-        binding.layoutSearchView.imgSearch.isFocusable = true
-        binding.layoutSearchView.editUser.isFocusable = true
-    }
-
-    private fun setFocusableOff() {
-        binding.layoutSearchView.editUser.isFocusable = false
-        binding.layoutSearchView.imgSearch.isFocusable = false
-    }
-
-    private fun initTryAgainClickListener() =
-        binding.layoutMainSearchShowError.btnMainTryAgain.setOnClickListener {
-            val search = binding.layoutSearchView.editUser.text.toString()
-            lifecycleScope.launch { model.intent.emit(MainIntent.GetData(search)) }
-        }
-
-    private fun initSearchClickListener() =
-        binding.layoutSearchView.imgSearch.setOnClickListener {
-                val search = binding.layoutSearchView.editUser.text.toString()
-                lifecycleScope.launch { model.intent.emit(MainIntent.GetData(search)) }
-        }
 
     override fun observeViewModel() = lifecycleScope.launch {
         model.state.collectLatest {
@@ -75,42 +43,5 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             }
         }
     }
-
-    private fun showError(msg: String) {
-        hideLoading()
-        binding.layoutMainSearchShowError.root.visibility = View.VISIBLE
-        binding.layoutMainSearchShowError.txtMainError.text = msg
-        binding.progressBar.visibility = View.GONE
-        binding.rvData.visibility = View.GONE
-    }
-
-    private fun showData(data: List<ReposAndUsersData>) {
-        hideLoading()
-        Log.d(frTag, data.toString())
-        setDataToAdapter(data)
-    }
-
-    private fun showLoading() {
-        setFocusableOff()
-        binding.layoutMainSearchShowError.root.visibility = View.GONE
-        binding.progressBar.visibility = View.VISIBLE
-        binding.rvData.visibility = View.GONE
-    }
-
-    private fun hideLoading() {
-        setFocusableOn()
-        binding.layoutMainSearchShowError.root.visibility = View.GONE
-        binding.rvData.visibility = View.VISIBLE
-        binding.progressBar.visibility = View.GONE
-    }
-
-    private fun initAdapter() {
-        adapter = DataAdapter(this)
-        binding.rvData.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvData.adapter = adapter
-    }
-
-    private fun setDataToAdapter(data: List<ReposAndUsersData>) =
-        adapter.setData(data)
 
 }

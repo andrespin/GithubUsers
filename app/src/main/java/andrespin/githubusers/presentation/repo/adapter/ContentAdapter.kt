@@ -1,11 +1,9 @@
 package andrespin.githubusers.presentation.repo.adapter
 
-import andrespin.githubusers.R
 import andrespin.githubusers.databinding.ItemContentBinding
 import andrespin.githubusers.domain.entity.ContentItem
 import andrespin.githubusers.presentation.repo.RepoFragment
 import andrespin.githubusers.presentation.repo.RepoIntent
-import andrespin.githubusers.presentation.repo.RepoViewModel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 
+@Suppress("IMPLICIT_CAST_TO_ANY")
 class ContentAdapter(
-    private val repoFragment: RepoFragment,
-    private val model: RepoViewModel,
+    private val fragment: RepoFragment,
     private val web: WebView,
     private val recyclerView: RecyclerView
 ) : RecyclerView.Adapter<ContentViewHolder>() {
@@ -37,27 +35,44 @@ class ContentAdapter(
             )
         ).apply {
             itemView.setOnClickListener {
-
-                val pos = this.layoutPosition
-                val item = list[pos]
-                if (item.type == "dir") {
-                    repoFragment.lifecycleScope.launch {
-                        repoFragment.model.intent.emit(
-                            RepoIntent.OpenDir(item._links.self)
-                        )
-                    }
-                } else if (item.type == "file") {
-                    web.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
-                    web.loadUrl(item._links.html)
-                }
+                setItemClickedEvent(list[this.layoutPosition])
             }
-
         }
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) =
         holder.bind(list[position])
 
     override fun getItemCount() = list.size
+
+    private fun setItemClickedEvent(item: ContentItem) =
+        when (item.type) {
+            "dir" -> {
+                openDirectory(item)
+            }
+            "file" -> {
+                showDataOnWebView(item)
+            }
+            else -> {
+                doNothing()
+            }
+        }
+
+    private fun openDirectory(item: ContentItem) = fragment.lifecycleScope.launch {
+        sendOpenDirectoryIntent(item)
+    }
+
+    private suspend fun sendOpenDirectoryIntent(item: ContentItem) =  fragment.model.intent.emit(
+        RepoIntent.OpenDir(item._links.self)
+    )
+
+    private fun showDataOnWebView(item: ContentItem) {
+        web.visibility = View.VISIBLE
+        recyclerView.visibility = View.GONE
+        web.loadUrl(item._links.html)
+    }
+
+    private fun doNothing() {
+        // Просто заглушка, чтобы не портить симметрию :)
+    }
 
 }

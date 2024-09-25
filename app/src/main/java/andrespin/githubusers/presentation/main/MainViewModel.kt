@@ -45,13 +45,11 @@ class MainViewModel
     private fun loadData(strToSearch: String) = viewModelScope.launch {
         getDataUseCase.invoke(strToSearch)
             .catch {
-                Log.e(vmTag, it.message.toString())
                 emitState.emit(MainState.ShowError(it.message.toString()))
             }
-            .collect{
+            .collect {
                 emitState.emit(MainState.ShowData(it))
             }
-
     }
 
 }

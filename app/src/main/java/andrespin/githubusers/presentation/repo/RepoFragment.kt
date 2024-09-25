@@ -64,7 +64,6 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
 
     private fun initAdapter() {
         adapter = ContentAdapter(this,
-            model,
             binding.web, binding.rvContent)
         binding.rvContent.layoutManager = LinearLayoutManager(requireContext())
         binding.rvContent.adapter = adapter

@@ -30,16 +30,7 @@ class DataAdapter(private val fragment: MainFragment) : RecyclerView.Adapter<Dat
             )
         ).apply {
             itemView.setOnClickListener {
-                val pos = this.layoutPosition
-                val item = list[pos]
-                if (item.areUsers) {
-                    val webIntent = Intent(Intent.ACTION_VIEW)
-                    webIntent.data = Uri.parse(item.html_url_user)
-                    fragment.requireActivity().startActivity(webIntent)
-                } else {
-                    val bundle = bundleOf("full_name_repo" to item.full_name_repo)
-                    fragment.findNavController().navigate(R.id.action_main_to_repo, bundle)
-                }
+                setItemClickedEvent(list[this.layoutPosition], fragment)
             }
         }
 
@@ -47,5 +38,23 @@ class DataAdapter(private val fragment: MainFragment) : RecyclerView.Adapter<Dat
         holder.bind(list[position])
 
     override fun getItemCount() = list.size
+
+    private fun setItemClickedEvent(item: ReposAndUsersData, fragment: MainFragment) =
+        if (item.areUsers) {
+            openBrowser(item, fragment)
+        } else {
+            navigateToRepoFragment(item, fragment)
+        }
+
+    private fun openBrowser(item: ReposAndUsersData, fragment: MainFragment) {
+        val webIntent = Intent(Intent.ACTION_VIEW)
+        webIntent.data = Uri.parse(item.html_url_user)
+        fragment.requireActivity().startActivity(webIntent)
+    }
+
+    private fun navigateToRepoFragment(item: ReposAndUsersData, fragment: MainFragment) {
+        val bundle = bundleOf("full_name_repo" to item.full_name_repo)
+        fragment.findNavController().navigate(R.id.action_main_to_repo, bundle)
+    }
 }
 
