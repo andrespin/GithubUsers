@@ -9,11 +9,15 @@ sealed class RepoState : State {
 
     data object Loading : RepoState()
 
+    data object MoveBack : RepoState()
+
     data class ShowData(val data: List<ContentItem>) : RepoState()
 
 }
 
 sealed class RepoIntent : Intent {
+
+    data object MoveBack : RepoIntent()
 
     data class GetData(val full_name_repo: String) : RepoIntent()
 

@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
-// .addInterceptor(new ErrorInterceptor())
+
     @Provides
     fun gson(): Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)

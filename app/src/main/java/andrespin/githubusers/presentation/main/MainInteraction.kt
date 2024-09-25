@@ -8,12 +8,14 @@ sealed class MainState : State {
 
     data object Loading : MainState()
 
+    data object ShowError: MainState()
+
     data class ShowData(val data: List<ReposAndUsersData>) : MainState()
 
 }
 
 sealed class MainIntent : Intent {
 
-    data object GetData : MainIntent()
+    data class GetData(val str_to_search: String) : MainIntent()
 
 }

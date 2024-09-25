@@ -5,49 +5,44 @@ import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.domain.repo.ReposRepository
 import andrespin.githubusers.domain.repo.UsersRepository
 import andrespin.githubusers.domain.entity.Result
-import andrespin.githubusers.domain.entity.UsersData
-import android.util.Log
-import kotlinx.coroutines.CoroutineStart
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.merge
-
+import kotlinx.coroutines.flow.map
 
 class GetDataUseCase(
     private val convert: ConvertToReposAndUsersDataUseCase,
     private val usersRepository: UsersRepository,
     private val reposRepository: ReposRepository
 ) {
-    suspend fun invoke(login: String): List<ReposAndUsersData> {
+    suspend fun invoke(login: String): Flow<List<ReposAndUsersData>> = flow {
+        val res = getUsers(login) + getRepos(login)
+        emit(res)
+    }.map { conv(it) }
 
-        val reposFlow = flow {
-            when (val response = reposRepository.getRepos(login)) {
-                is Result.Success -> emit(response.data.items)
-                is Result.Error -> throw Exception(response.exception.message.toString())
-            }
+    private suspend fun getUsers(login: String) = getUsersFlow(login).catch {
+        throw Exception(it)
+    }.first()
+
+    private suspend fun getRepos(login: String) = getReposFlow(login).catch {
+        throw Exception(it)
+    }.first()
+
+    private suspend fun getReposFlow(login: String) = flow {
+        when (val response = reposRepository.getRepos(login)) {
+            is Result.Success -> emit(response.data.items)
+            is Result.Error -> throw Exception(response.exception.message.toString())
         }
-        val usersFlow = flow {
-            when (val response = usersRepository.getUsers(login)) {
-                is Result.Success -> emit(response.data.items)
-                is Result.Error -> throw Exception(response.exception.message.toString())
-            }
-        }
-
-        val list = reposFlow.first() + usersFlow.first()
-
-        return conv(list)
-
     }
 
-
-
-
-    private suspend fun conv(data: List<Data>): List<ReposAndUsersData> {
-        Log.d("GetDataUseCase convert.invoke(data)", convert.invoke(data).toString())
-        return convert.invoke(data)
+    private suspend fun getUsersFlow(login: String) = flow {
+        when (val response = usersRepository.getUsers(login)) {
+            is Result.Success -> emit(response.data.items)
+            is Result.Error -> throw Exception(response.exception.message.toString())
+        }
     }
 
-
+    private suspend fun conv(data: List<Data>): List<ReposAndUsersData> = convert.invoke(data)
 
 }

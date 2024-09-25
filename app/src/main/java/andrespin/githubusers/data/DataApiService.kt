@@ -19,6 +19,10 @@ interface DataApiService {
 
     // https://api.github.com/repos/andrespin/OnlineDictionary/contents
 
+    // andrespineda132/andrespineda132
+
+//    "/repos/$fullNameRepo/contents"
+
     // https://api.github.com/repos/andrespin/OnlineDictionary/contents/.idea?ref=master
 
     @GET("/search/users?")

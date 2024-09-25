@@ -6,7 +6,9 @@ import andrespin.githubusers.presentation.base.BaseFragment
 import andrespin.githubusers.databinding.FragmentMainBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.presentation.main.adapter.repos_and_users.DataAdapter
+import android.text.method.KeyListener
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,22 +31,48 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
 
     override fun init() {
         initAdapter()
-        binding.layoutSearchView.imgSearch.setOnClickListener {
-            Log.d(frTag, "Start")
-            lifecycleScope.launch { model.intent.emit(MainIntent.GetData) }
-        }
-
+        initTryAgainClickListener()
+        initSearchClickListener()
+        setFocusableOn()
     }
 
-    override fun observeViewModel() = lifecycleScope.launch {
+    private fun setFocusableOn() {
+        binding.layoutSearchView.imgSearch.isFocusable = true
+        binding.layoutSearchView.editUser.isFocusable = true
+    }
 
+    private fun setFocusableOff() {
+        binding.layoutSearchView.editUser.isFocusable = false
+        binding.layoutSearchView.imgSearch.isFocusable = false
+    }
+
+    private fun initTryAgainClickListener() =
+        binding.layoutMainSearchShowError.btnMainTryAgain.setOnClickListener {
+            val search = binding.layoutSearchView.editUser.text.toString()
+            lifecycleScope.launch { model.intent.emit(MainIntent.GetData(search)) }
+        }
+
+    private fun initSearchClickListener() =
+        binding.layoutSearchView.imgSearch.setOnClickListener {
+                val search = binding.layoutSearchView.editUser.text.toString()
+                lifecycleScope.launch { model.intent.emit(MainIntent.GetData(search)) }
+        }
+
+    override fun observeViewModel() = lifecycleScope.launch {
         model.state.collectLatest {
             when (it) {
                 MainState.Loading -> showLoading()
                 is MainState.ShowData -> showData(it.data)
+                MainState.ShowError -> showError()
             }
         }
+    }
 
+    private fun showError() {
+        hideLoading()
+        binding.layoutMainSearchShowError.root.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
+        binding.rvData.visibility = View.GONE
     }
 
     private fun showData(data: List<ReposAndUsersData>) {
@@ -54,11 +82,17 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
     }
 
     private fun showLoading() {
-
+        setFocusableOff()
+        binding.layoutMainSearchShowError.root.visibility = View.GONE
+        binding.progressBar.visibility = View.VISIBLE
+        binding.rvData.visibility = View.GONE
     }
 
     private fun hideLoading() {
-
+        setFocusableOn()
+        binding.layoutMainSearchShowError.root.visibility = View.GONE
+        binding.rvData.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
     }
 
     private fun initAdapter() {

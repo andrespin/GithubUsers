@@ -9,8 +9,8 @@ class ContentRepositoryImpl(
     private val remoteDataSourceImpl: RemoteDataSourceImpl
 ) : ContentRepository {
 
-    override suspend fun getContent(userName: String, repoName: String): Result<Content> =
-        remoteDataSourceImpl.getRepoContent(userName, repoName)
+    override suspend fun getContent(fullNameRepo: String): Result<Content> =
+        remoteDataSourceImpl.getRepoContent(fullNameRepo)
 
     override suspend fun getDirContent(dir: String): Result<Content> =
         remoteDataSourceImpl.getRepoDirContent(dir)

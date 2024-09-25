@@ -5,6 +5,7 @@ import andrespin.githubusers.databinding.FragmentRepoBinding
 import andrespin.githubusers.domain.entity.ContentItem
 import andrespin.githubusers.presentation.repo.adapter.ContentAdapter
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -30,14 +31,15 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
     override fun init() {
         initAdapter()
         initBackBtnClickListener()
-
         val res = arguments?.getString("full_name_repo")
         lifecycleScope.launch { model.intent.emit(RepoIntent.GetData(res.toString())) }
     }
 
     private fun initBackBtnClickListener() {
         binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
+            lifecycleScope.launch {
+                model.intent.emit(RepoIntent.MoveBack)
+            }
         }
     }
 
@@ -46,8 +48,13 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
             when (it) {
                 RepoState.Loading -> showLoading()
                 is RepoState.ShowData -> showData(it.data)
+                RepoState.MoveBack -> moveBack()
             }
         }
+    }
+
+    private fun moveBack() {
+        findNavController().popBackStack()
     }
 
     private fun showData(data: List<ContentItem>) {
@@ -67,11 +74,13 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
         adapter.setData(data)
 
     private fun showLoading() {
-
+        binding.rvContent.visibility = View.GONE
+        binding.progressBarRepo.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
-
+        binding.rvContent.visibility = View.VISIBLE
+        binding.progressBarRepo.visibility = View.GONE
     }
 
 }

@@ -4,14 +4,14 @@ import andrespin.githubusers.databinding.ItemDataBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 class DataViewHolder(private val vb: ItemDataBinding) : RecyclerView.ViewHolder(vb.root) {
 
     fun bind(data: ReposAndUsersData) =
         if (data.areUsers) {
             showUserItem()
-            setDataToUserItem(data.login_user, data.score_user.toString())
-
+            setDataToUserItem(data.login_user, data.score_user.toString(), data.avatar_url_user)
         } else {
             showRepoItem()
             setDataToRepoItem(data.name_repo, data.forks_count_repo.toString(), data.description_repo)
@@ -24,10 +24,12 @@ class DataViewHolder(private val vb: ItemDataBinding) : RecyclerView.ViewHolder(
 
     private fun setDataToUserItem(
         login: String?,
-        score: String?
+        score: String?,
+        avatarUrlUser: String?
     ) {
         vb.itemUserData.txtLogin.text = login
         vb.itemUserData.txtScore.text = score
+        Picasso.get().load(avatarUrlUser).into(vb.itemUserData.imgAvatar)
     }
 
     private fun setDataToRepoItem(
