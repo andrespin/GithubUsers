@@ -45,8 +45,8 @@ class MainViewModel
     private fun loadData(strToSearch: String) = viewModelScope.launch {
         getDataUseCase.invoke(strToSearch)
             .catch {
-                Log.d(vmTag, it.message.toString())
-                emitState.emit(MainState.ShowError)
+                Log.e(vmTag, it.message.toString())
+                emitState.emit(MainState.ShowError(it.message.toString()))
             }
             .collect{
                 emitState.emit(MainState.ShowData(it))

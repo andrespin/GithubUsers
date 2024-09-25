@@ -37,12 +37,8 @@ class DataAdapter(private val fragment: MainFragment) : RecyclerView.Adapter<Dat
                     webIntent.data = Uri.parse(item.html_url_user)
                     fragment.requireActivity().startActivity(webIntent)
                 } else {
-
-                    //    "full_name": "andrespineda132/andrespineda132",
-
                     val bundle = bundleOf("full_name_repo" to item.full_name_repo)
                     fragment.findNavController().navigate(R.id.action_main_to_repo, bundle)
-
                 }
             }
         }

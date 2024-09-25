@@ -8,7 +8,7 @@ sealed class MainState : State {
 
     data object Loading : MainState()
 
-    data object ShowError: MainState()
+    data class ShowError(val msg: String): MainState()
 
     data class ShowData(val data: List<ReposAndUsersData>) : MainState()
 

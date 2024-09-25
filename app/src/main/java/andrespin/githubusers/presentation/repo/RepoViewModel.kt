@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -69,12 +70,15 @@ class RepoViewModel
     private fun getData(fullNameRepo: String) {
         val dir  = "https://api.github.com/repos/$fullNameRepo/contents"
         dirList.add(dir)
-        Log.d(vmTag, fullNameRepo)
         viewModelScope.launch {
-            val content =  getContentUseCase.invoke(
+            getContentUseCase.invoke(
                 fullNameRepo
-            )
-           emitState.emit(RepoState.ShowData(content))
+            ).catch {
+                it.printStackTrace()
+            }.collect{
+                emitState.emit(RepoState.ShowData(it))
+            }
+
         }
     }
 }

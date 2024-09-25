@@ -68,6 +68,7 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        onResumeFragment()
         Log.d("$frTag lifecycle", "onResume")
     }
 
@@ -100,6 +101,10 @@ abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
     }
 
     abstract fun init()
+
+    open fun onResumeFragment() {
+
+    }
 
     open fun pause() {
 

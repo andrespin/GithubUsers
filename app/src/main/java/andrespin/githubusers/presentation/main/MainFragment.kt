@@ -6,7 +6,6 @@ import andrespin.githubusers.presentation.base.BaseFragment
 import andrespin.githubusers.databinding.FragmentMainBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.presentation.main.adapter.repos_and_users.DataAdapter
-import android.text.method.KeyListener
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +32,16 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
         initAdapter()
         initTryAgainClickListener()
         initSearchClickListener()
+        downloadEditTextRequest()
         setFocusableOn()
+    }
+
+    override fun onResumeFragment() = downloadEditTextRequest()
+
+    private fun downloadEditTextRequest() {
+        val search = binding.layoutSearchView.editUser.text.toString()
+        lifecycleScope.launch { model.intent.emit(MainIntent.GetData(search)) }
+        Log.d(frTag, "downloadEditTextRequest() $search")
     }
 
     private fun setFocusableOn() {
@@ -63,14 +71,15 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>() {
             when (it) {
                 MainState.Loading -> showLoading()
                 is MainState.ShowData -> showData(it.data)
-                MainState.ShowError -> showError()
+                is MainState.ShowError -> showError(it.msg)
             }
         }
     }
 
-    private fun showError() {
+    private fun showError(msg: String) {
         hideLoading()
         binding.layoutMainSearchShowError.root.visibility = View.VISIBLE
+        binding.layoutMainSearchShowError.txtMainError.text = msg
         binding.progressBar.visibility = View.GONE
         binding.rvData.visibility = View.GONE
     }
