@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
+class RepoFragment : RepoFragmentAbstract<FragmentRepoBinding, RepoViewModel>() {
 
     lateinit var adapter: ContentAdapter
 
@@ -29,18 +29,7 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
         get() = "RepoFragment"
 
     override fun init() {
-        initAdapter()
-        initBackBtnClickListener()
-        val res = arguments?.getString("full_name_repo")
-        lifecycleScope.launch { model.intent.emit(RepoIntent.GetData(res.toString())) }
-    }
-
-    private fun initBackBtnClickListener() {
-        binding.btnBack.setOnClickListener {
-            lifecycleScope.launch {
-                model.intent.emit(RepoIntent.MoveBack)
-            }
-        }
+        initAll(this)
     }
 
     override fun observeViewModel() =  lifecycleScope.launch {
@@ -52,34 +41,4 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
             }
         }
     }
-
-    private fun moveBack() {
-        findNavController().popBackStack()
-    }
-
-    private fun showData(data: List<ContentItem>) {
-        hideLoading()
-        setDataToAdapter(data)
-    }
-
-    private fun initAdapter() {
-        adapter = ContentAdapter(this,
-            binding.web, binding.rvContent)
-        binding.rvContent.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvContent.adapter = adapter
-    }
-
-    private fun setDataToAdapter(data: List<ContentItem>) =
-        adapter.setData(data)
-
-    private fun showLoading() {
-        binding.rvContent.visibility = View.GONE
-        binding.progressBarRepo.visibility = View.VISIBLE
-    }
-
-    private fun hideLoading() {
-        binding.rvContent.visibility = View.VISIBLE
-        binding.progressBarRepo.visibility = View.GONE
-    }
-
 }
