@@ -17,8 +17,6 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class RepoFragment : RepoFragmentAbstract<FragmentRepoBinding, RepoViewModel>() {
 
-    lateinit var adapter: ContentAdapter
-
     override val viewModelClass: Class<RepoViewModel>
         get() = RepoViewModel::class.java
 

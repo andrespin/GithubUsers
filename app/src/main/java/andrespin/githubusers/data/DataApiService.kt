@@ -12,19 +12,6 @@ import retrofit2.http.Url
 
 interface DataApiService {
 
-
-    // https://api.github.com/search/users?q=andrespin
-
-    // https://api.github.com/search/repositories?q=andrespin
-
-    // https://api.github.com/repos/andrespin/OnlineDictionary/contents
-
-    // andrespineda132/andrespineda132
-
-//    "/repos/$fullNameRepo/contents"
-
-    // https://api.github.com/repos/andrespin/OnlineDictionary/contents/.idea?ref=master
-
     @GET("/search/users?")
     suspend fun getUsers(
         @Query("q") action: String

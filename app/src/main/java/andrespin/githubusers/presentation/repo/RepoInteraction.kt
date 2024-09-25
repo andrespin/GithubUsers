@@ -3,7 +3,6 @@ package andrespin.githubusers.presentation.repo
 import andrespin.githubusers.presentation.base.Intent
 import andrespin.githubusers.presentation.base.State
 import andrespin.githubusers.domain.entity.ContentItem
-import andrespin.githubusers.domain.entity.ReposAndUsersData
 
 sealed class RepoState : State {
 
@@ -18,6 +17,8 @@ sealed class RepoState : State {
 sealed class RepoIntent : Intent {
 
     data object MoveBack : RepoIntent()
+
+    data object ShowWebView : RepoIntent()
 
     data class GetData(val full_name_repo: String) : RepoIntent()
 

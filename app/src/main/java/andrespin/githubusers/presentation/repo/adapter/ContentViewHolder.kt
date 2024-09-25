@@ -2,9 +2,7 @@ package andrespin.githubusers.presentation.repo.adapter
 
 import andrespin.githubusers.R
 import andrespin.githubusers.databinding.ItemContentBinding
-import andrespin.githubusers.domain.entity.Content
 import andrespin.githubusers.domain.entity.ContentItem
-import andrespin.githubusers.presentation.repo.RepoFragment
 import androidx.recyclerview.widget.RecyclerView
 
 class ContentViewHolder(

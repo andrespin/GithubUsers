@@ -6,7 +6,6 @@ import andrespin.githubusers.domain.entity.UsersData
 import javax.inject.Inject
 import retrofit2.Response
 import andrespin.githubusers.domain.entity.Result
-import android.util.Log
 
 class RemoteDataSourceImpl
 @Inject constructor(private val dataApiService: DataApiService) {

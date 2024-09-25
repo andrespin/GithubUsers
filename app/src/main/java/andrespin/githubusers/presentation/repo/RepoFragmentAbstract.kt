@@ -19,7 +19,6 @@ abstract class RepoFragmentAbstract<VB : FragmentRepoBinding, VM : RepoViewModel
         initBackBtnClickListener()
         initAdapter(fragment)
         sendGetDataIntent(getArgumentsFromBundle())
-
     }
 
     protected fun moveBack() {
