@@ -2,7 +2,7 @@ package andrespin.githubusers.presentation.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import andrespin.githubusers.base.BaseFragment
+import andrespin.githubusers.presentation.base.BaseFragment
 import andrespin.githubusers.databinding.FragmentMainBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.presentation.main.adapter.repos_and_users.DataAdapter

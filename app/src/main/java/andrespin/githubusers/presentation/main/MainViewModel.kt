@@ -1,6 +1,6 @@
 package andrespin.githubusers.presentation.main
 
-import andrespin.githubusers.base.AppViewModel
+import andrespin.githubusers.presentation.base.AppViewModel
 import andrespin.githubusers.domain.usecase.GetDataUseCase
 import android.util.Log
 import androidx.lifecycle.viewModelScope

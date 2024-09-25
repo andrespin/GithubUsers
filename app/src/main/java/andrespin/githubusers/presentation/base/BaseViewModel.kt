@@ -1,4 +1,4 @@
-package andrespin.githubusers.base
+package andrespin.githubusers.presentation.base
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

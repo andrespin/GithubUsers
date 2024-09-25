@@ -1,7 +1,7 @@
 package andrespin.githubusers.presentation.main
 
-import andrespin.githubusers.base.Intent
-import andrespin.githubusers.base.State
+import andrespin.githubusers.presentation.base.Intent
+import andrespin.githubusers.presentation.base.State
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 
 sealed class MainState : State {

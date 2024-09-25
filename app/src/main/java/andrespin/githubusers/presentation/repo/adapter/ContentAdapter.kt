@@ -19,11 +19,7 @@ class ContentAdapter(
     private val model: RepoViewModel,
     private val web: WebView,
     private val recyclerView: RecyclerView
-)
-
-    : RecyclerView.Adapter<ContentViewHolder>() {
-
-    // ArrayList<ContentItem>()
+) : RecyclerView.Adapter<ContentViewHolder>() {
 
     private var list: List<ContentItem> = arrayListOf()
 
@@ -40,8 +36,6 @@ class ContentAdapter(
                 false
             )
         ).apply {
-
-
             itemView.setOnClickListener {
 
                 val pos = this.layoutPosition
@@ -59,25 +53,6 @@ class ContentAdapter(
                 }
             }
 
-
-//                vb.imgContentType.setImageResource(R.drawable.ic_file)
-
-            /*
-            val webView: WebView = findViewById(R.id.browser)
-webView.loadUrl("file:///android_asset/page.html")
-             */
-
-//            itemView.setOnClickListener {
-//                val pos = this.layoutPosition
-//                val item = list[pos]
-//                if (item.areUsers) {
-//                    val webIntent = Intent(Intent.ACTION_VIEW)
-//                    webIntent.data = Uri.parse(item.html_url_user)
-//                    fragment.requireActivity().startActivity(webIntent)
-//                } else {
-//                    itemView
-//                }
-//            }
         }
 
     override fun onBindViewHolder(holder: ContentViewHolder, position: Int) =

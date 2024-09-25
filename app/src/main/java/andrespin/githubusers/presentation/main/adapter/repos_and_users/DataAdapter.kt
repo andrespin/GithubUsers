@@ -43,10 +43,6 @@ class DataAdapter(private val fragment: MainFragment) : RecyclerView.Adapter<Dat
                     val bundle = bundleOf("full_name_repo" to item.full_name_repo)
                     fragment.findNavController().navigate(R.id.action_main_to_repo, bundle)
 
-                    /*
-                    val bundle = bundleOf("amount" to amount)
-view.findNavController().navigate(R.id.confirmationAction, bundle)
-                     */
                 }
             }
         }

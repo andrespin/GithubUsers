@@ -1,6 +1,6 @@
 package andrespin.githubusers.presentation.repo
 
-import andrespin.githubusers.base.BaseFragment
+import andrespin.githubusers.presentation.base.BaseFragment
 import andrespin.githubusers.databinding.FragmentRepoBinding
 import andrespin.githubusers.domain.entity.ContentItem
 import andrespin.githubusers.presentation.repo.adapter.ContentAdapter
@@ -30,6 +30,7 @@ class RepoFragment : BaseFragment<FragmentRepoBinding, RepoViewModel>() {
     override fun init() {
         initAdapter()
         initBackBtnClickListener()
+
         val res = arguments?.getString("full_name_repo")
         lifecycleScope.launch { model.intent.emit(RepoIntent.GetData(res.toString())) }
     }

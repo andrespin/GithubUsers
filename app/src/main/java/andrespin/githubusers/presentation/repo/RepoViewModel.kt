@@ -1,8 +1,9 @@
 package andrespin.githubusers.presentation.repo
 
-import andrespin.githubusers.base.AppViewModel
+import andrespin.githubusers.presentation.base.AppViewModel
 import andrespin.githubusers.domain.usecase.GetContentUseCase
 import andrespin.githubusers.domain.usecase.GetDirContentUseCase
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -26,7 +27,7 @@ class RepoViewModel
     override fun handleIntent() = viewModelScope.launch {
         getIntent.collectLatest {
             when (it) {
-                is RepoIntent.GetData -> getData()
+                is RepoIntent.GetData -> getData(it.full_name_repo)
                 is RepoIntent.OpenDir -> openDir(it.dir)
             }
         }
@@ -41,7 +42,8 @@ class RepoViewModel
         }
     }
 
-    private fun getData() {
+    private fun getData(fullNameRepo: String) {
+        Log.d(vmTag, fullNameRepo)
         viewModelScope.launch {
             val content =  getContentUseCase.invoke(
                 "andrespin",
