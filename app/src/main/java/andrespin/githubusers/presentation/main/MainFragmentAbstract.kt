@@ -4,9 +4,15 @@ import andrespin.githubusers.databinding.FragmentMainBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.presentation.base.BaseFragment
 import andrespin.githubusers.presentation.main.adapter.DataAdapter
+import android.content.Context
+import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.internal.ViewUtils.hideKeyboard
+import com.google.android.material.internal.ViewUtils.showKeyboard
 import kotlinx.coroutines.launch
 
 abstract class MainFragmentAbstract<VB : FragmentMainBinding, VM : MainViewModel> :
@@ -74,12 +80,17 @@ abstract class MainFragmentAbstract<VB : FragmentMainBinding, VM : MainViewModel
 
     private fun setFocusableOn() {
         binding.layoutSearchView.imgSearch.isFocusable = true
+        binding.layoutSearchView.editUser.isEnabled = true
+        binding.layoutSearchView.editUser.isClickable = true
         binding.layoutSearchView.editUser.isFocusable = true
+        binding.layoutSearchView.editUser.setOnClickListener {
+            binding.layoutSearchView.editUser.showKeyboard()
+        }
     }
 
     private fun setFocusableOff() {
         binding.layoutSearchView.editUser.isFocusable = false
-        binding.layoutSearchView.imgSearch.isFocusable = false
+        binding.layoutSearchView.editUser.isEnabled = false
     }
 
     private fun hideAll() {
