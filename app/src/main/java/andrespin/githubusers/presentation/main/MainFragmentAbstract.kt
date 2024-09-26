@@ -79,18 +79,14 @@ abstract class MainFragmentAbstract<VB : FragmentMainBinding, VM : MainViewModel
         }
 
     private fun setFocusableOn() {
-        binding.layoutSearchView.imgSearch.isFocusable = true
-        binding.layoutSearchView.editUser.isEnabled = true
-        binding.layoutSearchView.editUser.isClickable = true
-        binding.layoutSearchView.editUser.isFocusable = true
-        binding.layoutSearchView.editUser.setOnClickListener {
-            binding.layoutSearchView.editUser.showKeyboard()
-        }
+        binding.layoutSearchView.editUserNotActive.visibility = View.GONE
+        binding.layoutSearchView.editUser.visibility = View.VISIBLE
     }
 
     private fun setFocusableOff() {
-        binding.layoutSearchView.editUser.isFocusable = false
-        binding.layoutSearchView.editUser.isEnabled = false
+        binding.layoutSearchView.editUserNotActive.visibility = View.VISIBLE
+        binding.layoutSearchView.editUser.visibility = View.GONE
+        binding.layoutSearchView.editUserNotActive.text = binding.layoutSearchView.editUser.text
     }
 
     private fun hideAll() {

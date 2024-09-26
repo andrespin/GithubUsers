@@ -12,6 +12,16 @@
         android:layout_weight="1"
         android:inputType="textPersonName" />
 
+    <EditText
+        android:id="@+id/editUserNotActive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:enabled="false"
+        android:ems="10"
+        android:layout_weight="1"
+        android:inputType="textPersonName" />
+
     <ImageView
         android:id="@+id/imgSearch"
         android:layout_width="wrap_content"
