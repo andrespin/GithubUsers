@@ -3,7 +3,7 @@ package andrespin.githubusers.presentation.main
 import andrespin.githubusers.databinding.FragmentMainBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.presentation.base.BaseFragment
-import andrespin.githubusers.presentation.main.adapter.repos_and_users.DataAdapter
+import andrespin.githubusers.presentation.main.adapter.DataAdapter
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager

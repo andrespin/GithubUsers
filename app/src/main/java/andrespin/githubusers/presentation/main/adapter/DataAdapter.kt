@@ -1,9 +1,10 @@
-package andrespin.githubusers.presentation.main.adapter.repos_and_users
+package andrespin.githubusers.presentation.main.adapter
 
 import andrespin.githubusers.R
 import andrespin.githubusers.databinding.ItemDataBinding
 import andrespin.githubusers.domain.entity.ReposAndUsersData
 import andrespin.githubusers.presentation.main.MainFragment
+import andrespin.githubusers.presentation.main.adapter.repos_and_users.DataViewHolder
 import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater

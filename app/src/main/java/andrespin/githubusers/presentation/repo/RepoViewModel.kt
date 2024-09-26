@@ -3,6 +3,7 @@ package andrespin.githubusers.presentation.repo
 import andrespin.githubusers.presentation.base.AppViewModel
 import andrespin.githubusers.domain.usecase.GetContentUseCase
 import andrespin.githubusers.domain.usecase.GetDirContentUseCase
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch

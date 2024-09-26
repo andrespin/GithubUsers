@@ -49,9 +49,11 @@ class ContentAdapter(
             "dir" -> {
                 openDirectory(item)
             }
+
             "file" -> {
                 showDataOnWebView(item)
             }
+
             else -> {
                 doNothing()
             }
@@ -61,14 +63,25 @@ class ContentAdapter(
         sendOpenDirectoryIntent(item)
     }
 
-    private suspend fun sendOpenDirectoryIntent(item: ContentItem) =  fragment.model.intent.emit(
+    private suspend fun sendOpenDirectoryIntent(item: ContentItem) = fragment.model.intent.emit(
         RepoIntent.OpenDir(item._links.self)
     )
 
     private fun showDataOnWebView(item: ContentItem) {
+        showWebViewWithData(item)
+        sendWebViewIsOpenedIntent()
+    }
+
+    private fun showWebViewWithData(item: ContentItem) {
         web.visibility = View.VISIBLE
         recyclerView.visibility = View.GONE
         web.loadUrl(item._links.html)
+    }
+
+    private fun sendWebViewIsOpenedIntent() = fragment.lifecycleScope.launch {
+        fragment.model.intent.emit(
+            RepoIntent.ShowWebView
+        )
     }
 
     private fun doNothing() {
